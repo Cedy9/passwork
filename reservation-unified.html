@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiftWork - Réservation</title>
+    <link rel="stylesheet" href="reservation-unified.css">
+    <link rel="stylesheet" href="pricing-cards.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="lw-container">
+        <div class="lw-header">
+            <div class="lw-logo">
+                <img src="../assets/logo.png" alt="LiftWork" onerror="this.src='https://via.placeholder.com/120x40?text=LiftWork'">
+            </div>
+        </div>
+
+        <!-- Indicateur de progression -->
+        <div class="lw-progress">
+            <div class="lw-step active lw-step-clickable" id="step1-indicator" data-step="1">
+                <div class="lw-step-number">1</div>
+                <div class="lw-step-label">Mode</div>
+            </div>
+            <div class="lw-step lw-step-clickable" id="step2-indicator" data-step="2">
+                <div class="lw-step-number">2</div>
+                <div class="lw-step-label">Créneau</div>
+            </div>
+            <div class="lw-step lw-step-clickable" id="step3-indicator" data-step="3">
+                <div class="lw-step-number">3</div>
+                <div class="lw-step-label">Détails</div>
+            </div>
+            <div class="lw-step lw-step-clickable" id="step4-indicator" data-step="4">
+                <div class="lw-step-number">4</div>
+                <div class="lw-step-label">Confirmation</div>
+            </div>
+            <div class="lw-step lw-step-clickable" id="step5-indicator" data-step="5">
+                <div class="lw-step-number">5</div>
+                <div class="lw-step-label">Succès</div>
+            </div>
+        </div>
+
+        <!-- Étape 1: Choix du mode de réservation -->
+        <div class="lw-step-content active" id="step1">
+            <h2>Choisissez votre mode de réservation</h2>
+            
+            <!-- Nouveaux tableaux de tarification -->
+            <div class="lw-pricing-container">
+                <!-- Option Standard -->
+                <div class="lw-pricing-card">
+                    <!-- Badge de valeur -->
+                    <div class="lw-pricing-badge" style="background-color: #28a745; color: white; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Économique</div>
+                    
+                    <div class="lw-pricing-icon">
+                        <i class="fas fa-wrench"></i> <!-- Nouvelle icône plus appropriée -->
+                    </div>
+                    
+                    <h3 class="lw-pricing-title">Standard</h3>
+                    <div class="lw-pricing-price standard">29 CHF</div>
+                    <div class="lw-pricing-duration"><strong>2 heures consécutives</strong> de service</div>
+                    
+                    <!-- Information plus utile pour le client -->
+                    <div class="lw-pricing-slots">
+                        <span class="lw-pricing-slots-dot standard"></span>
+                        <span>Disponible tous les jours</span>
+                    </div>
+                    
+                    <div class="lw-pricing-hours">9h - 17h</div>
+                    
+                    <!-- Nouvelle section "Idéal pour" -->
+                    <div style="background-color: rgba(40, 167, 69, 0.1); padding: 8px; border-radius: 4px; margin: 10px 0; font-size: 0.9rem;">
+                        <strong>Idéal pour:</strong> Diagnostics, entretiens rapides
+                    </div>
+                    
+                    <ul class="lw-pricing-features">
+                        <li>Rendez-vous sous 72h</li>
+                        <li>Devis détaillé</li>
+                        <li>Suivi en temps réel</li>
+                        <li>Accès au carnet digital</li>
+                    </ul>
+                    
+                    <!-- Bouton plus convaincant avec animation au survol -->
+                    <button class="lw-btn-reserve standard standard-btn" style="transition: all 0.3s ease; transform: scale(1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Choisir cette option →</button>
+                    
+                    <!-- Lien de comparaison -->
+                    <div style="text-align: center; margin-top: 10px;">
+                        <a href="javascript:void(0)" onclick="toggleComparisonSection()" style="font-size: 0.8rem; color: #6c757d; text-decoration: none;">Comparer les options</a>
+                    </div>
+                </div>
+                
+                <!-- Option Express (populaire) -->
+                <div class="lw-pricing-card popular">
+                    <!-- Badge amélioré -->
+                    <div class="lw-pricing-badge" style="background-color: #007bff; color: white; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Populaire</div>
+                    
+                    <div class="lw-pricing-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    
+                    <h3 class="lw-pricing-title">Express</h3>
+                    <div class="lw-pricing-price express">49 CHF</div>
+                    <div class="lw-pricing-duration"><strong>4 heures consécutives</strong> de service</div>
+                    
+                    <!-- Information améliorée -->
+                    <div class="lw-pricing-slots">
+                        <span class="lw-pricing-slots-dot express"></span>
+                        <span>Disponibilité prioritaire</span>
+                    </div>
+                    
+                    <div class="lw-pricing-hours">8h - 18h</div>
+                    
+                    <!-- Section "Idéal pour" -->
+                    <div style="background-color: rgba(0, 123, 255, 0.1); padding: 8px; border-radius: 4px; margin: 10px 0; font-size: 0.9rem;">
+                        <strong>Idéal pour:</strong> Réparations, entretiens complets
+                    </div>
+                    
+                    <ul class="lw-pricing-features">
+                        <li>Rendez-vous sous 48h</li>
+                        <li>Devis détaillé</li>
+                        <li>Suivi en temps réel</li>
+                        <li>Accès au carnet digital</li>
+                        <li>Service prioritaire</li>
+                    </ul>
+                    
+                    <!-- Bouton amélioré -->
+                    <button class="lw-btn-reserve express express-btn" style="transition: all 0.3s ease; transform: scale(1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Choisir cette option →</button>
+                    
+                    <!-- Lien de comparaison -->
+                    <div style="text-align: center; margin-top: 10px;">
+                        <a href="javascript:void(0)" onclick="toggleComparisonSection()" style="font-size: 0.8rem; color: #6c757d; text-decoration: none;">Comparer les options</a>
+                    </div>
+                </div>
+                
+                <!-- Option Turbo -->
+                <div class="lw-pricing-card turbo">
+                    <!-- Badge premium -->
+                    <div class="lw-pricing-badge" style="background-color: #dc3545; color: white; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Premium</div>
+                    
+                    <div class="lw-pricing-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    
+                    <h3 class="lw-pricing-title">Turbo</h3>
+                    <div class="lw-pricing-price turbo">69 CHF</div>
+                    <div class="lw-pricing-duration"><strong>6 heures consécutives</strong> de service</div>
+                    
+                    <!-- Information améliorée -->
+                    <div class="lw-pricing-slots">
+                        <span class="lw-pricing-slots-dot turbo"></span>
+                        <span>Service complet sans interruption</span>
+                    </div>
+                    
+                    <div class="lw-pricing-hours">7h - 19h</div>
+                    
+                    <!-- Section "Idéal pour" -->
+                    <div style="background-color: rgba(220, 53, 69, 0.1); padding: 8px; border-radius: 4px; margin: 10px 0; font-size: 0.9rem;">
+                        <strong>Idéal pour:</strong> Réparations complexes, restaurations
+                    </div>
+                    
+                    <ul class="lw-pricing-features">
+                        <li>Rendez-vous sous 24h</li>
+                        <li>Devis détaillé</li>
+                        <li>Suivi en temps réel</li>
+                        <li>Accès au carnet digital</li>
+                        <li>Service ultra-prioritaire</li>
+                        <li>Assistance 24/7</li>
+                    </ul>
+                    
+                    <!-- Bouton amélioré -->
+                    <button class="lw-btn-reserve turbo-btn" style="transition: all 0.3s ease; transform: scale(1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Choisir cette option →</button>
+                    
+                    <!-- Lien de comparaison -->
+                    <div style="text-align: center; margin-top: 10px;">
+                        <a href="javascript:void(0)" onclick="toggleComparisonSection()" style="font-size: 0.8rem; color: #6c757d; text-decoration: none;">Comparer les options</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section de comparaison des options (masquée par défaut) -->
+            <div id="compare" class="lw-comparison-section" style="margin-top: 50px; background-color: #f8f9fa; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: none; transition: all 0.4s ease;">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #333;">Comparaison des options</h3>
+                
+                <table style="width: 100%; border-collapse: collapse; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">Caractéristiques</th>
+                            <th style="padding: 15px; text-align: center; border-bottom: 1px solid #ddd; color: #28a745;">Standard</th>
+                            <th style="padding: 15px; text-align: center; border-bottom: 1px solid #ddd; color: #007bff;">Express</th>
+                            <th style="padding: 15px; text-align: center; border-bottom: 1px solid #ddd; color: #dc3545;">Turbo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd;"><strong>Prix</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">29 CHF</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">49 CHF</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">69 CHF</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd;"><strong>Durée de service</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">2 heures</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">4 heures</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">6 heures</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd;"><strong>Délai de rendez-vous</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">72h</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">48h</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">24h</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd;"><strong>Heures disponibles</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">9h - 17h</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">8h - 18h</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">7h - 19h</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd;"><strong>Niveau de priorité</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">Standard</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">Prioritaire</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;">Ultra-prioritaire</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd;"><strong>Assistance 24/7</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;"><i class="fas fa-times" style="color: #dc3545;"></i></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;"><i class="fas fa-times" style="color: #dc3545;"></i></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center;"><i class="fas fa-check" style="color: #28a745;"></i></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px;"><strong>Idéal pour</strong></td>
+                            <td style="padding: 12px 15px; text-align: center;">Diagnostics, entretiens rapides</td>
+                            <td style="padding: 12px 15px; text-align: center;">Réparations, entretiens complets</td>
+                            <td style="padding: 12px 15px; text-align: center;">Réparations complexes, restaurations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="margin-bottom: 20px;">Choisissez l'option qui correspond le mieux à vos besoins</p>
+                    <div style="display: flex; justify-content: center; gap: 20px;">
+                        <button class="lw-btn-reserve standard standard-btn" style="transition: all 0.3s ease;" onclick="document.querySelector('.standard-btn').scrollIntoView({behavior: 'smooth'})">Option Standard</button>
+                        <button class="lw-btn-reserve express express-btn" style="transition: all 0.3s ease;" onclick="document.querySelector('.express-btn').scrollIntoView({behavior: 'smooth'})">Option Express</button>
+                        <button class="lw-btn-reserve turbo-btn" style="transition: all 0.3s ease;" onclick="document.querySelector('.turbo-btn').scrollIntoView({behavior: 'smooth'})">Option Turbo</button>
+                    </div>
+                </div>
+            </div>
+            
+                    </div>
+
+        <!-- Étape 2: Sélection du créneau -->
+        <div class="lw-step-content" id="step2">
+            <h2>Choisissez votre créneau <span id="mode-selected-label" class="mode-badge"></span></h2>
+            
+            <!-- Aide-mémoire de la formule sélectionnée -->
+            <div class="lw-selected-plan-summary" id="selected-plan-summary" style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h4 style="margin: 0; color: #333;">Votre option: <span id="selected-plan-name">Standard</span></h4>
+                    <p style="margin: 5px 0 0 0;"><span id="selected-plan-duration">2 heures</span> de service • <span id="selected-plan-price">29 CHF</span></p>
+                </div>
+                <div>
+                    <button onclick="toggleComparisonSection()" style="background: none; border: none; color: #007bff; cursor: pointer; text-decoration: underline;">Modifier mon choix</button>
+                </div>
+            </div>
+            
+            <div class="lw-date-filter" style="background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px;">
+                <h3 class="lw-filter-heading">Quand souhaitez-vous venir?</h3>
+                <p class="lw-filter-quote">"Le bon moment est celui qui vous convient le mieux"</p>
+                
+                <!-- Options de jour avec icônes améliorées -->
+                <div class="lw-date-period" style="display: flex; gap: 10px; margin: 15px 0;">
+                    <button class="lw-period-btn active" data-period="workdays" style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease;">
+                        <i class="fas fa-briefcase" style="font-size: 24px; margin-bottom: 10px; color: #495057;"></i>
+                        <span>Dès que possible</span>
+                        <small style="margin-top: 5px; color: #6c757d;">Lundi à vendredi</small>
+                    </button>
+                    <button class="lw-period-btn" data-period="saturday" style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease;">
+                        <i class="fas fa-calendar-day" style="font-size: 24px; margin-bottom: 10px; color: #495057;"></i>
+                        <span>Uniquement le samedi</span>
+                        <small style="margin-top: 5px; color: #6c757d;">Weekend uniquement</small>
+                    </button>
+                </div>
+                
+                <h3 class="lw-filter-heading">Préférez-vous une heure précise?</h3>
+                <p class="lw-filter-quote">"Chaque moment de la journée a sa propre énergie"</p>
+                
+                <!-- Options d'heure avec visuels améliorés -->
+                <div class="lw-time-preference" style="display: flex; gap: 10px; margin: 15px 0;">
+                    <button class="lw-time-btn" data-time="morning" style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease;">
+                        <div style="background: linear-gradient(45deg, #fcb045, #fd1d1d); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <i class="fas fa-sun" style="color: white;"></i>
+                        </div>
+                        <span>Matin</span>
+                        <small style="margin-top: 5px; color: #6c757d;">9h - 12h</small>
+                    </button>
+                    <button class="lw-time-btn" data-time="afternoon" style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease;">
+                        <div style="background: linear-gradient(45deg, #2193b0, #6dd5ed); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <i class="fas fa-moon" style="color: white;"></i>
+                        </div>
+                        <span>Après-midi</span>
+                        <small style="margin-top: 5px; color: #6c757d;">13h - 17h</small>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Calendrier avec style amélioré -->
+            <div class="lw-calendar" style="display: none; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px; margin-top: 25px;">
+                <div class="lw-calendar-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <button id="prev-month" style="background: none; border: none; font-size: 18px; color: #495057; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h3 id="current-month" style="margin: 0; color: #333; font-weight: 600;">Mai 2025</h3>
+                    <button id="next-month" style="background: none; border: none; font-size: 18px; color: #495057; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Noms des jours de la semaine -->
+                <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 15px;">
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Lun</div>
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Mar</div>
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Mer</div>
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Jeu</div>
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Ven</div>
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Sam</div>
+                    <div style="font-weight: 600; color: #6c757d; font-size: 0.9rem;">Dim</div>
+                </div>
+                
+                <div class="lw-calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;">
+                    <!-- Les dates seront générées par JavaScript -->
+                </div>
+                
+                <!-- Légende du calendrier -->
+                <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center;">
+                    <div style="display: flex; align-items: center;">
+                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #dee2e6; margin-right: 5px;"></span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">Indisponible</span>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #28a745; margin-right: 5px;"></span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">Disponible</span>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #007bff; margin-right: 5px;"></span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">Sélectionné</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section des créneaux horaires avec style amélioré -->
+            <div class="lw-timeslots" style="display: none; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px; margin-top: 25px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                    <div>
+                        <h3 style="margin: 0; color: #333;">Créneaux disponibles <span id="selected-date-label" style="color: #007bff; font-weight: 600;"></span></h3>
+                        <p class="lw-filter-quote" style="margin: 5px 0 0 0; font-size: 0.9rem; color: #6c757d;">
+                            "Sélectionnez <span id="slots-needed">2 créneaux consécutifs</span> pour votre formule <span id="selected-plan-type">Standard</span>"
+                        </p>
+                    </div>
+                    <button id="change-date" style="background: none; border: none; color: #007bff; cursor: pointer; font-size: 0.9rem;">
+                        <i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> Changer de date
+                    </button>
+                </div>
+                
+                <div class="lw-selected-slots-counter" id="selected-slots-count" style="display: none; background-color: #e8f4ff; padding: 10px 15px; border-radius: 6px; margin-bottom: 15px; font-weight: 500; color: #007bff;">
+                    <i class="fas fa-check-circle" style="margin-right: 5px;"></i> <span id="slots-count-text">1 créneau sélectionné sur 2 requis</span>
+                </div>
+                
+                <div class="lw-slots-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;">
+                    <!-- Exemples modernes de créneaux (générés par JavaScript) -->
+                    <div class="lw-slot-item available" style="padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease; cursor: pointer; text-align: center;">
+                        <span class="lw-slot-time" style="display: block; font-size: 1.2rem; font-weight: 600; color: #333;">09:00</span>
+                        <span class="lw-slot-duration" style="display: block; margin-top: 5px; font-size: 0.8rem; color: #6c757d;">1 heure</span>
+                    </div>
+                    <div class="lw-slot-item available" style="padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease; cursor: pointer; text-align: center;">
+                        <span class="lw-slot-time" style="display: block; font-size: 1.2rem; font-weight: 600; color: #333;">10:00</span>
+                        <span class="lw-slot-duration" style="display: block; margin-top: 5px; font-size: 0.8rem; color: #6c757d;">1 heure</span>
+                    </div>
+                    <div class="lw-slot-item unavailable" style="padding: 15px; border-radius: 8px; border: 2px solid #f1f1f1; background: #f8f9fa; opacity: 0.6; text-align: center;">
+                        <span class="lw-slot-time" style="display: block; font-size: 1.2rem; font-weight: 600; color: #adb5bd;">11:00</span>
+                        <span class="lw-slot-unavailable" style="display: block; margin-top: 5px; font-size: 0.8rem; color: #dc3545;">Indisponible</span>
+                    </div>
+                    <div class="lw-slot-item available" style="padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease; cursor: pointer; text-align: center;">
+                        <span class="lw-slot-time" style="display: block; font-size: 1.2rem; font-weight: 600; color: #333;">14:00</span>
+                        <span class="lw-slot-duration" style="display: block; margin-top: 5px; font-size: 0.8rem; color: #6c757d;">1 heure</span>
+                    </div>
+                    <div class="lw-slot-item available" style="padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: #f8f9fa; transition: all 0.3s ease; cursor: pointer; text-align: center;">
+                        <span class="lw-slot-time" style="display: block; font-size: 1.2rem; font-weight: 600; color: #333;">15:00</span>
+                        <span class="lw-slot-duration" style="display: block; margin-top: 5px; font-size: 0.8rem; color: #6c757d;">1 heure</span>
+                    </div>
+                </div>
+                
+                <!-- Instruction pour la sélection de créneaux -->
+                <div style="margin-top: 20px; background-color: #fff3cd; padding: 10px 15px; border-radius: 6px; display: flex; align-items: center;">
+                    <i class="fas fa-info-circle" style="color: #856404; font-size: 1.2rem; margin-right: 10px;"></i>
+                    <p style="margin: 0; color: #856404; font-size: 0.9rem;">
+                        Pour la formule <strong>Standard</strong>, sélectionnez exactement <strong>2 créneaux consécutifs</strong> pour une durée totale de 2 heures.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="lw-navigation">
+                <button class="lw-back-btn" id="back-to-step1">Retour</button>
+                <button class="lw-next-btn" id="to-step3" disabled>Continuer</button>
+            </div>
+        </div>
+
+        <!-- Étape 3: Détails du service -->
+        <div class="lw-step-content" id="step3">
+            <h2>Détails de l'intervention</h2>
+            
+            <!-- Résumé de la sélection actuelle -->
+            <div class="lw-selection-summary" style="background-color: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 25px; border-left: 4px solid #007bff;">
+                <div style="display: flex; align-items: center;">
+                    <i class="fas fa-info-circle" style="color: #007bff; font-size: 1.4rem; margin-right: 10px;"></i>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0; color: #333;">Votre sélection</h4>
+                        <p style="margin: 0; font-size: 0.9rem; color: #6c757d;">
+                            Formule <span id="summary-plan-type" style="font-weight: 600; color: #007bff;">Standard</span> • 
+                            <span id="summary-date-time" style="font-weight: 500;">21 Mai 2025, 14:00</span> • 
+                            <span id="summary-duration">2 heures</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lw-service-details">
+                <!-- Type d'intervention avec cartes modernes -->
+                <div class="lw-form-group">
+                    <label for="service-type" style="display: block; margin-bottom: 10px; font-weight: 600; color: #333; font-size: 1.1rem;">Type d'intervention</label>
+                    <div class="lw-selection-cards" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px;">
+                        <div class="lw-card-option" style="border: 2px solid #e9ecef; border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background-color: white; position: relative; overflow: hidden;">
+                            <input type="radio" id="repair" name="service-type" value="repair" style="position: absolute; opacity: 0;" class="service-radio">
+                            <label for="repair" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 100%;">
+                                <div style="background-color: #f0f7ff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <i class="fas fa-wrench" style="font-size: 1.8rem; color: #007bff;"></i>
+                                </div>
+                                <span style="font-weight: 600; font-size: 1.1rem; color: #333; margin-bottom: 5px;">Réparation</span>
+                                <span style="font-size: 0.85rem; color: #6c757d; text-align: center;">Résolution de problèmes techniques</span>
+                            </label>
+                        </div>
+                        
+                        <div class="lw-card-option" style="border: 2px solid #e9ecef; border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background-color: white; position: relative; overflow: hidden;">
+                            <input type="radio" id="maintenance" name="service-type" value="maintenance" style="position: absolute; opacity: 0;" class="service-radio">
+                            <label for="maintenance" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 100%;">
+                                <div style="background-color: #f0f7ff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <i class="fas fa-cogs" style="font-size: 1.8rem; color: #007bff;"></i>
+                                </div>
+                                <span style="font-weight: 600; font-size: 1.1rem; color: #333; margin-bottom: 5px;">Entretien</span>
+                                <span style="font-size: 0.85rem; color: #6c757d; text-align: center;">Maintenance préventive régulière</span>
+                            </label>
+                        </div>
+                        
+                        <div class="lw-card-option" style="border: 2px solid #e9ecef; border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background-color: white; position: relative; overflow: hidden;">
+                            <input type="radio" id="diagnostic" name="service-type" value="diagnostic" style="position: absolute; opacity: 0;" class="service-radio">
+                            <label for="diagnostic" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 100%;">
+                                <div style="background-color: #f0f7ff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <i class="fas fa-search" style="font-size: 1.8rem; color: #007bff;"></i>
+                                </div>
+                                <span style="font-weight: 600; font-size: 1.1rem; color: #333; margin-bottom: 5px;">Diagnostic</span>
+                                <span style="font-size: 0.85rem; color: #6c757d; text-align: center;">Analyse et identification de problèmes</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Description du problème avec compteur de caractères -->
+                <div class="lw-form-group" style="margin-top: 25px;">
+                    <label for="problem-description" style="display: block; margin-bottom: 10px; font-weight: 600; color: #333; font-size: 1.1rem;">
+                        Description du problème
+                        <span id="char-counter" style="font-size: 0.8rem; color: #6c757d; font-weight: normal; margin-left: 10px;">0/500 caractères</span>
+                    </label>
+                    <textarea id="problem-description" rows="4" style="width: 100%; padding: 15px; border: 2px solid #e9ecef; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: border-color 0.3s ease; resize: vertical;" placeholder="Décrivez brièvement le problème ou le service souhaité" maxlength="500"></textarea>
+                </div>
+                
+                <!-- Coordonnées avec icônes et validation -->
+                <div class="lw-form-group" style="margin-top: 25px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333; font-size: 1.1rem;">Vos coordonnées</label>
+                    
+                    <div style="position: relative; margin-bottom: 15px;">
+                        <i class="fas fa-user" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #6c757d;"></i>
+                        <input type="text" id="fullname" style="width: 100%; padding: 15px 15px 15px 45px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" placeholder="Nom complet">
+                        <small class="error-message" style="display: none; color: #dc3545; font-size: 0.85rem; margin-top: 5px;">Veuillez saisir votre nom complet</small>
+                    </div>
+                    
+                    <div style="position: relative; margin-bottom: 15px;">
+                        <i class="fas fa-phone-alt" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #6c757d;"></i>
+                        <input type="tel" id="phone" style="width: 100%; padding: 15px 15px 15px 45px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" placeholder="Téléphone">
+                        <small class="error-message" style="display: none; color: #dc3545; font-size: 0.85rem; margin-top: 5px;">Veuillez saisir un numéro de téléphone valide</small>
+                    </div>
+                    
+                    <div style="position: relative;">
+                        <i class="fas fa-envelope" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #6c757d;"></i>
+                        <input type="email" id="email" style="width: 100%; padding: 15px 15px 15px 45px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" placeholder="Email">
+                        <small class="error-message" style="display: none; color: #dc3545; font-size: 0.85rem; margin-top: 5px;">Veuillez saisir une adresse email valide</small>
+                    </div>
+                </div>
+                
+                <!-- Notes et politique de confidentialité -->
+                <div style="margin-top: 20px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-size: 0.9rem; color: #6c757d;">
+                    <div style="display: flex; align-items: flex-start;">
+                        <i class="fas fa-shield-alt" style="color: #007bff; margin-right: 10px; margin-top: 2px;"></i>
+                        <p style="margin: 0;">Vos informations personnelles sont sécurisées et ne seront utilisées que pour votre réservation. Consultez notre <a href="#" style="color: #007bff; text-decoration: none;">politique de confidentialité</a>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lw-navigation">
+                <button class="lw-back-btn" id="back-to-step2">Retour</button>
+                <button class="lw-next-btn" id="to-step4">Continuer</button>
+            </div>
+        </div>
+
+        <!-- Étape 4: Récapitulatif et confirmation -->
+        <div class="lw-step-content" id="step4">
+            <h2>Récapitulatif de votre rendez-vous</h2>
+            
+            <div class="lw-summary-card">
+                <div class="lw-summary-header">
+                    <h3>Votre rendez-vous LiftWork</h3>
+                    <div id="summary-mode-badge" class="lw-mode-badge express">Express</div>
+                </div>
+                
+                <div class="lw-summary-content">
+                    <div class="lw-summary-section">
+                        <h4><i class="far fa-calendar-alt"></i> Date et Heure</h4>
+                        <p id="summary-datetime">Mercredi 21 Mai 2025, 14:00</p>
+                    </div>
+                    
+                    <div class="lw-summary-section">
+                        <h4><i class="fas fa-tools"></i> Intervention</h4>
+                        <p id="summary-service">Réparation</p>
+                        <p id="summary-description">Bruit étrange lors du démarrage, besoin d'un diagnostic.</p>
+                    </div>
+                    
+                    <div class="lw-summary-section">
+                        <h4><i class="far fa-user"></i> Vos informations</h4>
+                        <p id="summary-name">Jean Dupont</p>
+                        <p id="summary-contact">06 12 34 56 78 | jean.dupont@example.com</p>
+                    </div>
+                </div>
+                
+                <div class="lw-summary-footer">
+                    <div class="lw-vehicle-info">
+                        <h4>Informations véhicule (facultatif)</h4>
+                        <div class="lw-form-group">
+                            <input type="text" id="vehicle-plate" placeholder="Immatriculation">
+                            <input type="text" id="vehicle-model" placeholder="Marque et modèle">
+                        </div>
+                        <div class="lw-upload-zone">
+                            <label for="vehicle-photos">
+                                <i class="fas fa-camera"></i> Ajouter des photos (facultatif)
+                            </label>
+                            <input type="file" id="vehicle-photos" multiple accept="image/*" style="display:none">
+                            <div id="photo-preview" class="lw-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lw-navigation">
+                <button class="lw-back-btn" id="back-to-step3">Modifier</button>
+                <button class="lw-confirm-btn" id="to-step5">Confirmer le rendez-vous</button>
+                </div>
+            </div>
+
+            <!-- Étape 5 : Paiement -->
+            <div class="lw-step-content" id="step5">
+                <h2>Paiement</h2>
+                <div class="lw-payment-summary">
+                    <p>Montant à payer : <strong id="payment-amount">69 CHF</strong></p>
+                    <div class="lw-payment-methods">
+                        <label><input type="radio" name="payment-method" value="carte" checked> Carte bancaire</label>
+                        <label><input type="radio" name="payment-method" value="paypal"> PayPal</label>
+                    </div>
+                </div>
+                <!-- Formulaire Carte Bancaire -->
+                <form id="card-form" class="lw-card-form">
+                    <div class="lw-form-group">
+                        <label for="card-number">Numéro de carte</label>
+                        <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="lw-form-row">
+                        <div class="lw-form-group">
+                            <label for="card-expiry">Expiration</label>
+                            <input type="text" id="card-expiry" maxlength="5" placeholder="MM/AA">
+                        </div>
+                        <div class="lw-form-group">
+                            <label for="card-cvc">CVC</label>
+                            <input type="text" id="card-cvc" maxlength="4" placeholder="123">
+                        </div>
+                    </div>
+                    <div class="lw-form-group">
+                        <label for="card-name">Nom sur la carte</label>
+                        <input type="text" id="card-name" placeholder="Nom et prénom">
+                    </div>
+                </form>
+                <!-- Simulation PayPal -->
+                <div id="paypal-sim" class="lw-paypal-sim" style="display:none; text-align:center;">
+                    <button type="button" id="paypal-connect" class="lw-paypal-btn"><i class="fab fa-paypal"></i> Se connecter avec PayPal</button>
+                    <div id="paypal-success" style="display:none; color:green; margin-top:10px;">Connexion PayPal réussie !</div>
+                </div>
+                <div class="lw-navigation">
+                    <button class="lw-back-btn" id="back-to-step4">Retour</button>
+                    <button class="lw-confirm-btn" id="pay-and-confirm">Payer et confirmer</button>
+                </div>
+            </div>
+
+            <!-- Confirmation finale (success) -->
+            <div class="lw-step-content" id="confirmation">
+                <div class="lw-success-container">
+                    <div class="lw-success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Rendez-vous confirmé !</h2>
+                    <p class="lw-success-message">Votre rendez-vous a bien été enregistré.</p>
+                    <div class="lw-booking-details">
+                        <p><strong>Référence:</strong> <span id="booking-reference">LW-5892</span></p>
+                        <p><strong>Date et heure:</strong> <span id="booking-datetime">21/05/2025 à 14:00</span></p>
+                        <p><strong>Mode:</strong> <span id="booking-mode">Express</span></p>
+                    </div>
+                    <div class="lw-next-steps">
+                        <h3>Prochaines étapes</h3>
+                        <ul>
+                            <li>Un email de confirmation a été envoyé à votre adresse</li>
+                            <li>Vous recevrez un rappel 24h avant votre rendez-vous</li>
+                            <li>Vous pouvez modifier ou annuler votre rendez-vous jusqu'à 4h avant</li>
+                        </ul>
+                    </div>
+                    <button class="lw-home-btn">Retour à l'accueil</button>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Rendez-vous confirmé !</h2>
+                <p class="lw-success-message">Votre rendez-vous a bien été enregistré.</p>
+                <div class="lw-booking-details">
+                    <p><strong>Référence:</strong> <span id="booking-reference">LW-5892</span></p>
+                    <p><strong>Date et heure:</strong> <span id="booking-datetime">21/05/2025 à 14:00</span></p>
+                    <p><strong>Mode:</strong> <span id="booking-mode">Express</span></p>
+                </div>
+                <div class="lw-next-steps">
+                    <h3>Prochaines étapes</h3>
+                    <ul>
+                        <li>Un email de confirmation a été envoyé à votre adresse</li>
+                        <li>Vous recevrez un rappel 24h avant votre rendez-vous</li>
+                        <li>Vous pouvez modifier ou annuler votre rendez-vous jusqu'à 4h avant</li>
+                    </ul>
+                </div>
+                <button class="lw-home-btn">Retour à l'accueil</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="reservation-unified.js"></script>
+    
+    <!-- Script pour la gestion de la section de comparaison -->
+    <script>
+        function toggleComparisonSection() {
+            const comparisonSection = document.getElementById('compare');
+            const computedStyle = window.getComputedStyle(comparisonSection);
+            
+            // Récupérer l'affichage réel de l'élément (getComputedStyle pour être sûr)
+            const isHidden = computedStyle.display === 'none';
+            
+            if (isHidden) {
+                // Préparer l'animation de fade in
+                comparisonSection.style.opacity = '0';
+                comparisonSection.style.display = 'block';
+                
+                // Animation de fade in
+                setTimeout(() => {
+                    comparisonSection.style.transition = 'opacity 0.3s ease';
+                    comparisonSection.style.opacity = '1';
+                    
+                    // Défilement vers la section
+                    comparisonSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 10);
+            } else {
+                // Animation de fade out
+                comparisonSection.style.transition = 'opacity 0.3s ease';
+                comparisonSection.style.opacity = '0';
+                
+                // Cacher l'élément après l'animation
+                setTimeout(() => {
+                    comparisonSection.style.display = 'none';
+                }, 300);
+            }
+        }
+        
+        // Initialisation: s'assurer que le style display:none est effectivement appliqué
+        document.addEventListener('DOMContentLoaded', () => {
+            const comparisonSection = document.getElementById('compare');
+            comparisonSection.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

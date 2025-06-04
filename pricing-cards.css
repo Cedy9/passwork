@@ -1,0 +1,212 @@
+/* Styles pour les tableaux de tarification */
+.lw-pricing-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1000px;
+}
+
+.lw-pricing-card {
+  background-color: #1a1a1a;
+  border-radius: 15px;
+  color: white;
+  flex: 1;
+  padding: 25px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.lw-pricing-card:hover {
+  transform: translateY(-5px);
+}
+
+.lw-pricing-card.popular {
+  border: 2px solid #FF5722;
+}
+
+.lw-pricing-badge {
+  background-color: #FF5722;
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 15px;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+.lw-pricing-icon {
+  background-color: #333;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-bottom: 15px;
+  width: 40px;
+}
+
+.lw-pricing-icon i {
+  color: white;
+  font-size: 20px;
+}
+
+.lw-pricing-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+.lw-pricing-card .lw-pricing-title {
+  color: #4CAF50; /* Couleur par défaut (Standard) */
+}
+.lw-pricing-card.popular .lw-pricing-title {
+  color: #FF9800; /* Express */
+}
+.lw-pricing-card.turbo .lw-pricing-title {
+  color: #F44336; /* Turbo */
+}
+
+/* Correction : appliquer la classe 'turbo' à la carte Turbo dans le HTML */
+
+.lw-pricing-price {
+  color: #FF5722;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 15px 0;
+}
+
+.lw-pricing-price.express {
+  color: #FF9800;
+}
+
+.lw-pricing-price.standard {
+  color: #4CAF50;
+}
+
+.lw-pricing-slots {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.lw-pricing-slots-dot {
+  border-radius: 50%;
+  display: inline-block;
+  height: 12px;
+  margin-right: 10px;
+  width: 12px;
+}
+
+.lw-pricing-slots-dot.turbo {
+  background-color: #F44336;
+}
+
+.lw-pricing-slots-dot.express {
+  background-color: #FF9800;
+}
+
+.lw-pricing-slots-dot.standard {
+  background-color: #4CAF50;
+}
+
+.lw-pricing-hours {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.lw-pricing-features {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.lw-pricing-features li {
+  align-items: center;
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.lw-pricing-features li::before {
+  color: #FF5722;
+  content: "✓";
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.lw-btn-reserve {
+  background-color: #FF5722;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 25px;
+  padding: 12px 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.lw-btn-reserve:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.lw-btn-reserve.express {
+  background-color: #4CAF50;
+}
+
+.lw-btn-reserve.standard {
+  background-color: #FF9800;
+}
+
+/* Animation d'apparition */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lw-pricing-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.lw-pricing-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.lw-pricing-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.lw-pricing-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Styles pour une présentation alternative des tableaux de tarification */
+.lw-pricing-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.lw-pricing-toggle button {
+  background-color: transparent;
+  border: 1px solid #555;
+  border-radius: 30px;
+  color: #555;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin: 0 5px;
+  padding: 8px 15px;
+}

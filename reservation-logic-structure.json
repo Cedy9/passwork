@@ -1,0 +1,89 @@
+{
+  "state": {
+    "mode": null,
+    "date": null,
+    "timeSlots": [],
+    "serviceType": null,
+    "description": "",
+    "contact": {
+      "name": "",
+      "phone": "",
+      "email": ""
+    },
+    "vehicle": {
+      "plate": "",
+      "model": "",
+      "photos": []
+    }
+  },
+  "modes": [
+    {
+      "key": "standard",
+      "label": "Standard",
+      "price": 29,
+      "color": "#4CAF50",
+      "slotsPerDay": 13,
+      "hours": "9h - 17h",
+      "features": [
+        "Rendez-vous sous 72h",
+        "Devis détaillé",
+        "Suivi en temps réel",
+        "Accès au carnet digital"
+      ]
+    },
+    {
+      "key": "express",
+      "label": "Express",
+      "price": 49,
+      "color": "#FF9800",
+      "slotsPerDay": 5,
+      "hours": "8h - 18h",
+      "features": [
+        "Rendez-vous sous 48h",
+        "Devis détaillé",
+        "Suivi en temps réel",
+        "Accès au carnet digital",
+        "Service prioritaire"
+      ]
+    },
+    {
+      "key": "turbo",
+      "label": "Turbo",
+      "price": 69,
+      "color": "#F44336",
+      "slotsPerDay": 3,
+      "hours": "7h - 19h",
+      "features": [
+        "Rendez-vous sous 24h",
+        "Devis détaillé",
+        "Suivi en temps réel",
+        "Accès au carnet digital",
+        "Service ultra-prioritaire",
+        "Assistance 24/7"
+      ]
+    }
+  ],
+  "slots": {
+    "workdays": [
+      "08:00", "09:00", "10:00", "11:00", "12:00",
+      "14:00", "15:00", "16:00", "17:00"
+    ],
+    "saturday": [
+      "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00"
+    ]
+  },
+  "filters": {
+    "period": ["workdays", "saturday"],
+    "time": ["morning", "afternoon"]
+  },
+  "logic": {
+    "filterByPeriod": "Affiche les créneaux selon la période (jours ouvrables ou samedi)",
+    "filterByTime": "Affiche uniquement les créneaux du matin (<12h) ou de l'après-midi (>=12h)",
+    "selectDate": "Sélectionne une date, met à jour l'affichage des créneaux",
+    "selectTimeSlot": "Ajoute ou retire un créneau sélectionné, trie les créneaux sélectionnés",
+    "updateServiceDetails": "Récupère les infos de service et de contact",
+    "updateVehicleInfo": "Récupère les infos véhicule",
+    "updateSummary": "Met à jour le récapitulatif avant confirmation",
+    "confirmBooking": "Valide la réservation, marque les créneaux comme réservés et affiche la confirmation"
+  }
+}
